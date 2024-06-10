@@ -1,8 +1,6 @@
-pip install openpyxl
-
 import streamlit as st
 import pandas as pd
-uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
+uploaded_file = st.file_uploader("Choose an Excel file", type="csv")
 if uploaded_file is not None:
     data = pd.read_excel(uploaded_file)
     data = data.drop_duplicates(subset='Issue key')
