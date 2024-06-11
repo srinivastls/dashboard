@@ -4,9 +4,10 @@ import plotly.express as px
 
 
 def upload_file():
+    data = None
     uploaded_file = st.file_uploader("Upload a file", type=['csv', 'xlsx', 'json', 'txt'])
     if uploaded_file is not None:
-        data = None
+        
         file_extension = uploaded_file.name.split('.')[-1]
         if file_extension == 'csv':
             data = pd.read_csv(uploaded_file, parse_dates=['Created', 'Due date', 'Updated'])
