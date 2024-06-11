@@ -85,18 +85,18 @@ if len(status_filter) > 0 and len(assignee_filter) > 0 and len(issue_type_filter
 
     fig = px.pie(filtered_data, names='Priority', title='Issues by Priority', hole=0.3)
     st.plotly_chart(fig)
-
+    if 'Resolution Time (days)' in filtered_data.columns:
+        fig = px.bar(avg_resolution_time_by_assignee, x='Assignee', y='Resolution Time (days)', 
+                        title='Average Resolution Time by Assignee')
+        fig.update_traces(texttemplate='%{y:.2f}', textposition='outside')
+        st.plotly_chart(fig)
     issue_type_counts = filtered_data['Issue Type'].value_counts().reset_index()
     issue_type_counts.columns = ['Issue Type', 'Count']
     fig = px.bar(issue_type_counts, x='Issue Type', y='Count', title='Issues by Issue Type')
     fig = annotate_bar_chart(fig)
     st.plotly_chart(fig)
 
-    if 'Resolution Time (days)' in filtered_data.columns:
-        fig = px.bar(avg_resolution_time_by_assignee, x='Assignee', y='Resolution Time (days)', 
-                        title='Average Resolution Time by Assignee')
-        fig.update_traces(texttemplate='%{y:.2f}', textposition='outside')
-        st.plotly_chart(fig)
+
 st.subheader("Task Completion Status")
 # Calculate completion status
 filtered_data['Completion Status'] = None
