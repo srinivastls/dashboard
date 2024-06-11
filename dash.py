@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
-uploaded_file = st.file_uploader("Choose an Excel file", type="csv")
+upload=st.button("upload file")
 use_default = st.button("Use Default Data")
 
-if uploaded_file is not None:
+if upload:
+    uploaded_file = st.file_uploader("Choose an Excel file", type="csv")
     # Load the data from the uploaded file
     data = pd.read_csv(uploaded_file)
     data = data.drop_duplicates(subset='Issue key')
